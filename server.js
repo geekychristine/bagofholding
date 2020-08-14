@@ -6,9 +6,7 @@ const port = process.env.PORT || 8080;
 // Configure our application
 
 // Set the routes
-app.get("/", (req, res) => {
-  res.send("Hello, I'm the App!");
-});
+app.use(require("./app/routes"));
 
 // Start our server!
 app.listen(port, () =>
