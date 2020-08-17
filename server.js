@@ -8,7 +8,7 @@ const port = process.env.PORT || 8080;
 // Tell express where our static assets are
 app.use(express.static(__dirname + "/public"));
 
-// Set handlebars as templating engine
+// Set handlebars as template engine
 app.engine(
   "hbs",
   handlebars({
