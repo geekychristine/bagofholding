@@ -1,17 +1,18 @@
 <h1>Bag of Holding</h1>
 <p>Total Items: {{items.results.length}} of {{items.count}}</p>
 
-<table class="table">
+<table class="table table-bordered table-hover table-striped">
   <tr>
     <th scope="col">Name</th>
     <th scope="col">Type</th>
     <th scope="col">Rarity</th>
     <th scope="col">Attunement?</th>
+    <th></th>
   </tr>
   {{#each items.results}}
   <tr>
     <td>
-      {{name}}
+      <a href="item/{{slug}}">{{name}}</a>
     </td>
     <td>
       {{type}}
@@ -24,6 +25,7 @@
       ({{requires_attunement}})
       {{/if}}
     </td>
+    <td></td>
   </tr>
   {{/each}}
 </table>
