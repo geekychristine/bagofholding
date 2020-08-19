@@ -1,1 +1,12 @@
-<h1>Hello World from Handlebars</h1>
+<h1>Bag of Holding</h1>
+<p>Total Items: {{items.results.length}} of {{items.count}}</p>
+
+<table>
+  {{#each items.results}}
+  <tr>
+    <td>
+      {{name}}
+    </td>
+  </tr>
+  {{/each}}
+</table>
