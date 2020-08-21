@@ -1,6 +1,10 @@
+// Load environment variables
+require("dotenv").config();
+
 // Grab our dependencies
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 const handlebars = require("express-handlebars");
 const port = process.env.PORT || 8080;
 
@@ -13,13 +17,19 @@ app.engine(
   "hbs",
   handlebars({
     defaultLayout: "main",
-    extname: ".hbs",
+    extname: ".hbs"
   })
 );
 
 app.set("view engine", "hbs");
 
-// Set the routes
+// Connect to database ======================
+mongoose.connect(process.env.DB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+// Set the routes ===========================
 app.use(require("./app/routes"));
 
 // Start our server!
