@@ -2,6 +2,14 @@ const mongoose = require("mongoose");
 const slugify = require("../utils").slugify;
 const Schema = mongoose.Schema;
 
+/**
+ * Mongoose Model Convenient Methods
+ * Item.find() - Find any items that match our query
+ * Item.findOne() - Find only one that matches query
+ * Item.save() - Update Item
+ * Item.remove() - Deleting Item
+ * */
+
 // Create a data schema
 const itemSchema = new Schema({
   slug: {

@@ -7,8 +7,11 @@ const itemsController = require("./controllers/items.controller");
 // Main routes (Bag)
 router.get("/", mainController.showHome);
 
-// Item detail routes
+// All available items
 router.get("/items", itemsController.showItems);
+router.get("/items/seed", itemsController.seedItems);
+
+// Item detail routes
 router.get("/item/:slug", itemsController.showItem);
 
 // Create Item
