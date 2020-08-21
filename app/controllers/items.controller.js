@@ -16,10 +16,12 @@ module.exports = {
     const items = require("../../data/items.json").results;
 
     // Use the item model to insert/save
-    for (item of items) {
-      let newItem = new Item(item);
-      newItem.save();
-    }
+    Item.remove({}, () => {
+      for (item of items) {
+        let newItem = new Item(item);
+        newItem.save();
+      }
+    });
 
     // Seeded!
     res.send("Database Seeded!");
