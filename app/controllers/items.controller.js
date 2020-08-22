@@ -27,6 +27,16 @@ function showItem(req, res) {
   });
 }
 
+// Show create Item page
+function showCreate(req, res) {
+  res.render("create");
+}
+
+// Process create Item form
+function processCreate(req, res) {
+  console.warn("req", req);
+}
+
 function seedItems(req, res) {
   // Use the item model to insert/save
   Item.deleteMany({}, () => {
@@ -41,6 +51,8 @@ function seedItems(req, res) {
 }
 
 module.exports = {
+  showCreate: showCreate,
+  processCreate: processCreate,
   showItems: showItems,
   showItem: showItem,
   seedItems: seedItems,
