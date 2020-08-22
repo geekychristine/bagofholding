@@ -34,7 +34,28 @@ function showCreate(req, res) {
 
 // Process create Item form
 function processCreate(req, res) {
-  console.warn("req", req);
+  const { name, desc, type, rarity, requires_attunement } = req.body;
+
+  const attunement = requires_attunement === true ? "requires attunement" : "";
+
+  // Create new item
+  const item = new Item({
+    name,
+    desc,
+    type,
+    rarity,
+    requires_attunement: attunement,
+  });
+
+  // SAve the Item
+  item.save((err) => {
+    if (err) {
+      throw err;
+    }
+
+    // Redirect to newly created item page.
+    res.redirect(`/item/${item.slug}`);
+  });
 }
 
 function seedItems(req, res) {
