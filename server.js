@@ -6,6 +6,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const handlebars = require("express-handlebars");
+var bodyParser = require("body-parser");
 const port = process.env.PORT || 8080;
 
 // Monkey-patch mongoose to default to lean queries
@@ -39,6 +40,9 @@ mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+// Configure Body Parser for post requests
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set the routes ===========================
 app.use(require("./app/routes"));
