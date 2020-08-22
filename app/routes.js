@@ -8,18 +8,23 @@ const itemsController = require("./controllers/items.controller");
 router.get("/", mainController.showHome);
 
 // All available items
-router.get("/items", itemsController.showItems);
+router.get("/items/", itemsController.showItems);
 router.get("/items/seed", itemsController.seedItems);
 
 // Item detail routes
-router.get("/item/:slug", itemsController.showItem);
+router.get("/items/:slug", itemsController.showItem);
 
 // Create Item
 router.get("/items/create", itemsController.showCreate);
 router.post("/items/create", itemsController.processCreate);
 
 // Edit Item
+// router.get("/items/edit", itemsController.showEdit);
+// router.post("/items/edit", itemsController.processEdit);
+
 // Delete Item
+// router.get("/items/delete", itemsController.showDelete);
+// router.post("/items/delete", itemsController.processDelete);
 
 //Export the router
 module.exports = router;

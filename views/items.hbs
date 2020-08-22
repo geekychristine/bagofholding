@@ -1,3 +1,20 @@
+{{#if item }}
+
+  {{#if success}} 
+    <div class="alert alert-success">
+      {{success}}
+    </div>
+  {{/if}}
+
+  <h1>{{item.name}}</h1>
+  <p>{{item.type}}, {{item.rarity}} Item</p>
+
+  <p>{{item.desc}}</p>
+  <p>Requires Attunement? {{#if item.requires_attunement}} Yes {{else}} No {{/if}}</p>
+
+
+{{else}}
+
 <h1>All Magic Items</h1>
 <p>Total Items: {{items.length}}</p>
 
@@ -12,7 +29,7 @@
   {{#each items}}
   <tr>
     <td>
-      <a href="item/{{slug}}">{{name}}</a>
+      <a href="items/{{slug}}">{{name}}</a>
     </td>
     <td>
      {{type}}
@@ -22,10 +39,15 @@
     </td>
     <td>
       {{#if requires_attunement}}
-      ({{requires_attunement}})
+        ({{requires_attunement}})
       {{/if}}
     </td>
-    <td></td>
+    <td>      
+      <button class="btn btn-primary">Edit</button>
+      <button class="btn btn-danger">Delete</button>
+    </td>
   </tr>
   {{/each}}
 </table>
+
+{{/if}}
