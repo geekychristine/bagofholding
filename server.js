@@ -53,9 +53,10 @@ app.engine(
     extname: ".hbs",
     helpers: {
       isSelected: function (input, value) {
-        console.warn("input", input);
-        console.warn("value", value);
         return input === value ? "selected" : "";
+      },
+      isChecked: function (input) {
+        return input !== "" ? "checked" : "";
       },
     },
   })
