@@ -11,9 +11,6 @@ router.get("/", mainController.showHome);
 router.get("/items/", itemsController.showItems);
 router.get("/items/seed", itemsController.seedItems);
 
-// Item detail routes
-router.get("/items/:slug", itemsController.showItem);
-
 // Create Item
 router.get("/items/create", itemsController.showCreate);
 router.post("/items/create", itemsController.processCreate);
@@ -23,8 +20,10 @@ router.get("/items/:slug/edit", itemsController.showEdit);
 router.post("/items/:slug", itemsController.processEdit);
 
 // Delete Item
-// router.get("/items/delete", itemsController.showDelete);
-// router.post("/items/delete", itemsController.processDelete);
+// router.post("/items/:slug/delete", itemsController.processDelete);
+
+// Item detail routes
+router.get("/items/:slug", itemsController.showItem);
 
 //Export the router
 module.exports = router;
