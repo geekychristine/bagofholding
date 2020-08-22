@@ -8,6 +8,17 @@ const mongoose = require("mongoose");
 const handlebars = require("express-handlebars");
 const port = process.env.PORT || 8080;
 
+// Monkey-patch mongoose to default to lean queries
+const __setOptions = mongoose.Query.prototype.setOptions;
+
+mongoose.Query.prototype.setOptions = function (options, overwrite) {
+  __setOptions.apply(this, arguments);
+  if (this.mongooseOptions().lean == null) {
+    this.mongooseOptions({ lean: true });
+  }
+  return this;
+};
+
 // Configure our application
 // Tell express where our static assets are
 app.use(express.static(__dirname + "/public"));
@@ -17,7 +28,7 @@ app.engine(
   "hbs",
   handlebars({
     defaultLayout: "main",
-    extname: ".hbs"
+    extname: ".hbs",
   })
 );
 
@@ -26,7 +37,7 @@ app.set("view engine", "hbs");
 // Connect to database ======================
 mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
 // Set the routes ===========================
