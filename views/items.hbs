@@ -1,10 +1,10 @@
-{{#if item }}
+{{#if success }} 
+  <div class="alert alert-success">
+    {{success}}
+  </div>
+{{/if}}
 
-  {{#if success}} 
-    <div class="alert alert-success">
-      {{success}}
-    </div>
-  {{/if}}
+{{#if item }}
 
   <h1>{{item.name}}</h1>
   <p>{{item.type}}, {{item.rarity}} Item</p>
@@ -28,7 +28,7 @@
   {{#each items}}
   <tr>
     <td>
-      <a href="{{slug}}">{{name}}</a>
+      <a href="/items/{{slug}}">{{name}}</a>
     </td>
     <td>
      {{type}}
@@ -42,7 +42,7 @@
       {{/if}}
     </td>
     <td>      
-      <a href="{{slug}}/edit" class="btn btn-primary">Edit</a>
+      <a href="/items/{{slug}}/edit" class="btn btn-primary">Edit</a>
       {{!-- <a href="{{slug}}/delete" class="btn btn-danger">Delete</a> --}}
     </td>
   </tr>

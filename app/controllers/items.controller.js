@@ -10,7 +10,7 @@ function showItems(req, res) {
       res.send("No items to display.");
     }
 
-    res.render("items", { items: items });
+    res.render("items", { items, success: req.flash("success") });
   });
 }
 
@@ -71,10 +71,10 @@ function processCreate(req, res) {
     }
 
     // Set a successful flash message
-    req.flash("success", "Successfully created event!");
+    req.flash("success", "Item created!");
 
     // Redirect to newly created item page.
-    res.redirect(`/item/${item.slug}`);
+    res.redirect(`/items/${item.slug}`);
   });
 }
 
@@ -111,27 +111,29 @@ function processEdit(req, res) {
   }
 
   // Find existing item
-  Item.findOne({ slug: req.params.slug }, (err, item) => {
-    if (err) {
-      throw err;
-    }
+  Item.findOne({ slug: req.params.slug })
+    .lean(false)
+    .exec((err, item) => {
+      if (err) {
+        throw err;
+      }
 
-    // Update item
-    item.name = name;
-    item.desc = desc;
-    item.type = type;
-    item.rarity = rarity;
-    item.requires_attunement = requires_attunement;
+      // Update item
+      item.name = name;
+      item.desc = desc;
+      item.type = type;
+      item.rarity = rarity;
+      item.requires_attunement = requires_attunement;
 
-    item.save((err) => {
-      if (err) throw err;
+      item.save((err) => {
+        if (err) throw err;
 
-      // Success flash message
-      req.flash("success", "Item successfully updated!");
-      //Redirect user to item page
-      res.redirect("/items");
+        // Success flash message
+        req.flash("success", "Item updated!");
+        //Redirect user to item page
+        res.redirect("/items");
+      });
     });
-  });
 }
 
 function seedItems(req, res) {
