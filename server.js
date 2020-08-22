@@ -6,7 +6,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const handlebars = require("express-handlebars");
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
+
 const port = process.env.PORT || 8080;
 
 // Monkey-patch mongoose to default to lean queries
@@ -20,9 +24,24 @@ mongoose.Query.prototype.setOptions = function (options, overwrite) {
   return this;
 };
 
-// Configure our application
+// Configure our application =======================
+// set sessions and cookie parser
+app.use(cookieParser());
+app.use(
+  session({
+    secret: process.env.SECRET,
+    cookie: { maxAge: 60000 },
+    resave: false, // forces the session to be saved back to the store
+    saveUninitialized: false, // don't save unmodified
+  })
+);
+app.use(flash());
+
 // Tell express where our static assets are
 app.use(express.static(__dirname + "/public"));
+
+// Configure Body Parser for post requests
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set handlebars as template engine
 app.engine(
@@ -40,9 +59,6 @@ mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
-// Configure Body Parser for post requests
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set the routes ===========================
 app.use(require("./app/routes"));

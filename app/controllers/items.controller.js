@@ -23,7 +23,7 @@ function showItem(req, res) {
       res.send("Could not find that item.");
     }
 
-    res.render("item", { item: item });
+    res.render("item", { item: item, success: req.flash("success") });
   });
 }
 
@@ -52,6 +52,9 @@ function processCreate(req, res) {
     if (err) {
       throw err;
     }
+
+    // Set a successful flash message
+    req.flash("success", "Successfully created event!");
 
     // Redirect to newly created item page.
     res.redirect(`/item/${item.slug}`);
