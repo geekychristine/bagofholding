@@ -12,7 +12,6 @@
   <p>{{item.desc}}</p>
   <p>Requires Attunement? {{#if item.requires_attunement}} Yes {{else}} No {{/if}}</p>
 
-
 {{else}}
 
 <h1>All Magic Items</h1>
@@ -29,7 +28,7 @@
   {{#each items}}
   <tr>
     <td>
-      <a href="items/{{slug}}">{{name}}</a>
+      <a href="{{slug}}">{{name}}</a>
     </td>
     <td>
      {{type}}
