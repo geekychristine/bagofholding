@@ -15,8 +15,8 @@ router.get("/items/seed", itemsController.seedItems);
 router.get("/item/:slug", itemsController.showItem);
 
 // Create Item
-router.get("/item/create", itemsController.showCreate);
-router.post("/item/create", itemsController.processCreate);
+router.get("/items/create", itemsController.showCreate);
+router.post("/items/create", itemsController.processCreate);
 
 // Edit Item
 // Delete Item
