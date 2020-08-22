@@ -7,8 +7,9 @@ const app = express();
 const mongoose = require("mongoose");
 const handlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
-const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const expressValidator = require("express-validator");
 const flash = require("connect-flash");
 
 const port = process.env.PORT || 8080;
@@ -42,6 +43,7 @@ app.use(express.static(__dirname + "/public"));
 
 // Configure Body Parser for post requests
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator()); // this line must be immediately after express.bodyParser()!
 
 // Set handlebars as template engine
 app.engine(

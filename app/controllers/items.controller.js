@@ -16,7 +16,7 @@ function showItems(req, res) {
 
 // Show single Item
 function showItem(req, res) {
-  // grab a single item with the slug ping-pong
+  // grab a single item with the slug
   Item.findOne({ slug: req.params.slug }, (err, item) => {
     if (err) {
       res.status(404);
@@ -29,12 +29,29 @@ function showItem(req, res) {
 
 // Show create Item page
 function showCreate(req, res) {
-  res.render("create");
+  res.render("create", { errors: req.flash("errors") });
 }
 
 // Process create Item form
 function processCreate(req, res) {
   const { name, desc, type, rarity, requires_attunement } = req.body;
+  // Validate information
+  req.checkBody("name", "Name is required.").notEmpty();
+  req.checkBody("desc", "Description is required.").notEmpty();
+  req.checkBody("type", "Type is required.").notEmpty();
+  req.checkBody("rarity", "Rarity is required.").notEmpty();
+  req
+    .checkBody("requires_attunement", "Requires Attunement is required.")
+    .notEmpty();
+
+  const errors = req.validationErrors();
+  if (errors) {
+    req.flash(
+      "errors",
+      errors.map((err) => err.msg)
+    );
+    return res.redirect("create");
+  }
 
   const attunement = requires_attunement === true ? "requires attunement" : "";
 
