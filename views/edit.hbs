@@ -1,0 +1,56 @@
+<h1>Editing {{ item.name }}</h1>
+
+{{#if errors}} 
+  <div class="alert alert-danger"></div>
+    <ul>
+    {{#each errors }}
+      <li>{{this}}</li>
+    {{/each}}
+    </ul>
+  </div>
+ {{/if}}
+ 
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form action="/items/{{{item.slug}}}" method="post">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control" value="{{{item.name}}}">
+      </div>
+
+      <div class="form-group">
+        <label for="desc">Description</label>
+        <textarea name="desc" rows="5" class="form-control">{{{item.desc}}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select name="type" class="form-control" value="">
+          <option></option>
+          <option value="Wondrous item" {{isSelected item.type "Wondrous item"}}>Wondrous item</option>
+          <option value="Wand" {{isSelected item.type "Wand"}}>Wand</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="rarity">Rarity</label>
+        <select name="rarity" class="form-control">
+          <option></option>
+          <option value="Common">Common</option>
+          <option value="Uncommon">Uncommon</option>
+          <option value="Rare">Rare</option>
+          <option value="Very Rare">Very Rare</option>
+          <option value="Legendary">Legendary</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="requires_attunement">Requires Attunement?</label>
+        <input type="checkbox" name="requires_attunement" class="form-control" value="{{{item.requires_attunement}}}">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
