@@ -19,8 +19,8 @@ router.get("/items/create", itemsController.showCreate);
 router.post("/items/create", itemsController.processCreate);
 
 // Edit Item
-// router.get("/items/edit", itemsController.showEdit);
-// router.post("/items/edit", itemsController.processEdit);
+router.get("/items/:slug/edit", itemsController.showEdit);
+router.post("/items/:slug", itemsController.processEdit);
 
 // Delete Item
 // router.get("/items/delete", itemsController.showDelete);

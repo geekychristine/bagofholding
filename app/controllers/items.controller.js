@@ -23,7 +23,7 @@ function showItem(req, res) {
       res.send("Could not find that item.");
     }
 
-    res.render("item", { item: item, success: req.flash("success") });
+    res.render("items", { item: item, success: req.flash("success") });
   });
 }
 
@@ -78,6 +78,62 @@ function processCreate(req, res) {
   });
 }
 
+// Show create Item page
+function showEdit(req, res) {
+  Item.findOne({ slug: req.params.slug }, (err, item) => {
+    if (err) {
+      throw err;
+    }
+
+    res.render("edit", { item, errors: req.flash("errors") });
+  });
+}
+
+// Process create Item form
+function processEdit(req, res) {
+  const { name, desc, type, rarity, requires_attunement } = req.body;
+  // Validate information
+  req.checkBody("name", "Name is required.").notEmpty();
+  req.checkBody("desc", "Description is required.").notEmpty();
+  req.checkBody("type", "Type is required.").notEmpty();
+  req.checkBody("rarity", "Rarity is required.").notEmpty();
+  req
+    .checkBody("requires_attunement", "Requires Attunement is required.")
+    .notEmpty();
+
+  const errors = req.validationErrors();
+  if (errors) {
+    req.flash(
+      "errors",
+      errors.map((err) => err.msg)
+    );
+    return res.redirect(`/items/${req.params.slug}/edit`);
+  }
+
+  // Find existing item
+  Item.findOne({ slug: req.params.slug }, (err, item) => {
+    if (err) {
+      throw err;
+    }
+
+    // Update item
+    item.name = name;
+    item.desc = desc;
+    item.type = type;
+    item.rarity = rarity;
+    item.requires_attunement = requires_attunement;
+
+    item.save((err) => {
+      if (err) throw err;
+
+      // Success flash message
+      req.flash("success", "Item successfully updated!");
+      //Redirect user to item page
+      res.redirect("/items");
+    });
+  });
+}
+
 function seedItems(req, res) {
   // Use the item model to insert/save
   Item.deleteMany({}, () => {
@@ -94,6 +150,8 @@ function seedItems(req, res) {
 module.exports = {
   showCreate: showCreate,
   processCreate: processCreate,
+  showEdit: showEdit,
+  processEdit: processEdit,
   showItems: showItems,
   showItem: showItem,
   seedItems: seedItems,
