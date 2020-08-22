@@ -136,6 +136,16 @@ function processEdit(req, res) {
     });
 }
 
+function deleteItem(req, res) {
+  Item.remove({ slug: req.params.slug }, (err) => {
+    // set flash data
+    req.flash("success", "Item deleted!");
+
+    // redirect back to the items page
+    res.redirect("/items");
+  });
+}
+
 function seedItems(req, res) {
   // Use the item model to insert/save
   Item.deleteMany({}, () => {
@@ -156,5 +166,6 @@ module.exports = {
   processEdit: processEdit,
   showItems: showItems,
   showItem: showItem,
+  deleteItem: deleteItem,
   seedItems: seedItems,
 };

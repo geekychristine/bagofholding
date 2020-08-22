@@ -20,7 +20,7 @@ router.get("/items/:slug/edit", itemsController.showEdit);
 router.post("/items/:slug", itemsController.processEdit);
 
 // Delete Item
-// router.post("/items/:slug/delete", itemsController.processDelete);
+router.get("/items/:slug/delete", itemsController.deleteItem);
 
 // Item detail routes
 router.get("/items/:slug", itemsController.showItem);
