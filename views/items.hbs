@@ -1,5 +1,5 @@
 <h1>All Magic Items</h1>
-<p>Total Items: {{items.results.length}} of {{items.count}}</p>
+<p>Total Items: {{items.length}}</p>
 
 <table class="table table-bordered table-hover table-striped">
   <tr>
@@ -9,13 +9,13 @@
     <th scope="col">Attunement?</th>
     <th></th>
   </tr>
-  {{#each items.results}}
+  {{#each items}}
   <tr>
     <td>
       <a href="item/{{slug}}">{{name}}</a>
     </td>
     <td>
-      {{type}}
+     {{type}}
     </td>
     <td>
       {{rarity}}
