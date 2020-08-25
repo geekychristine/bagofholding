@@ -14,20 +14,21 @@ const Schema = mongoose.Schema;
 const itemSchema = new Schema({
   slug: {
     type: String,
-    unique: true
+    unique: true,
   },
   name: String,
   type: String,
   desc: String,
   rarity: String,
   requires_attunement: String,
+  stored: { type: Schema.Types.ObjectId, ref: "Inventory" },
   document__slug: String,
-  document__title: String
+  document__title: String,
 });
 
 // middleware -----
 // Make sure that the slug is cerated from the name
-itemSchema.pre("save", function(next) {
+itemSchema.pre("save", function (next) {
   this.slug = slugify(this.name);
   next();
 });
