@@ -1,3 +1,5 @@
+const Item = require("./models/item");
+
 // function to slugify a name
 function slugify(text) {
   return text
@@ -10,6 +12,18 @@ function slugify(text) {
     .replace(/-+$/, ""); // Trim - from end of text
 }
 
+const queryItem = (slug) => {
+  const item = Item.findOne({ slug: slug }, (err, item) => {
+    if (err) {
+      return "Could not find that item.";
+    }
+    return item;
+  });
+
+  return item;
+};
+
 module.exports = {
-  slugify
+  slugify,
+  queryItem,
 };

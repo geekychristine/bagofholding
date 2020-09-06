@@ -44,7 +44,11 @@
       {{/if}}
     </td>
     <td>      
-      <a href="/add/{{slug}}" class="btn btn-primary">Add to Bag</a>
+      <button type="button" class="btn btn-primary" onclick="fetch('/bag/{{slug}}/add', {
+          method: 'POST', body: JSON.stringify({
+            slug: '{{slug}}'
+          })
+        })">Add to Bag</button>
       <a href="/items/{{slug}}/edit" class="btn btn-primary">Edit</a>
       <a href="/items/{{slug}}/delete" class="btn btn-danger">Delete</a>
     </td>

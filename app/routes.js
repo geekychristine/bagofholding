@@ -7,7 +7,8 @@ const itemsController = require("./controllers/items.controller");
 
 // Main routes (Bag)
 router.get("/", bagController.showBag);
-router.get("/add/:slug", bagController.processAdd);
+router.post("/bag/:slug/add", bagController.processAdd);
+router.get("/bag/seed", bagController.seedBag);
 
 // All available items
 router.get("/items/", itemsController.showItems);
