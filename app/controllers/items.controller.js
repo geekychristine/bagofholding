@@ -64,7 +64,7 @@ function processCreate(req, res) {
     requires_attunement: attunement,
   });
 
-  // SAve the Item
+  // Save the Item
   item.save((err) => {
     if (err) {
       throw err;
