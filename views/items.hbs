@@ -12,6 +12,8 @@
   <p>{{item.desc}}</p>
   <p>Requires Attunement? {{#if item.requires_attunement}} Yes {{else}} No {{/if}}</p>
 
+  <p>Is Stored? {{item.stored}}</p>
+
 {{else}}
 
 <h1>All Magic Items</h1>
@@ -42,6 +44,7 @@
       {{/if}}
     </td>
     <td>      
+      <a href="/add/{{slug}}" class="btn btn-primary">Add to Bag</a>
       <a href="/items/{{slug}}/edit" class="btn btn-primary">Edit</a>
       <a href="/items/{{slug}}/delete" class="btn btn-danger">Delete</a>
     </td>
