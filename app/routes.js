@@ -1,11 +1,13 @@
 // Create a new express router
 const express = require("express");
 const router = express.Router();
-const mainController = require("./controllers/main.controller");
+// const mainController = require("./controllers/main.controller");
+const bagController = require("./controllers/bag.controller");
 const itemsController = require("./controllers/items.controller");
 
 // Main routes (Bag)
-router.get("/", mainController.showHome);
+router.get("/", bagController.showBag);
+router.get("/add/:slug", bagController.processAdd);
 
 // All available items
 router.get("/items/", itemsController.showItems);

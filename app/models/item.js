@@ -21,7 +21,7 @@ const itemSchema = new Schema({
   desc: String,
   rarity: String,
   requires_attunement: String,
-  stored: { type: Schema.Types.ObjectId, ref: "Inventory" },
+  stored: { type: Schema.Types.ObjectId, ref: "Bag" },
   document__slug: String,
   document__title: String,
 });
